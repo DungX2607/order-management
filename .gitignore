@@ -59,9 +59,9 @@ logs/
 *~
 
 # Application specific
-application-local.properties
-application-dev.properties
-application-prod.properties
+#application-local.properties
+#application-dev.properties
+#application-prod.properties
 
 # Sensitive data
 *.env

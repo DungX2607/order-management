@@ -15,6 +15,18 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    public ResponseEntity<Map<String, Object>> handleUsernameAlreadyExists(
+            UsernameAlreadyExistsException ex) {
+        Map<String, Object> error = new HashMap<>();
+        error.put("timestamp", LocalDateTime.now());
+        error.put("status", HttpStatus.CONFLICT.value());
+        error.put("error", "Conflict");
+        error.put("message", ex.getMessage());
+        
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+    
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex) {
         Map<String, Object> error = new HashMap<>();
